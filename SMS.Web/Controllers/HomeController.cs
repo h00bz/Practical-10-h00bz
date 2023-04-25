@@ -34,6 +34,10 @@ public class HomeController : Controller
         };
         return View(about);
     }
+  public IAction trial
+  {
+    Console.WriteLine("hello world");
+  }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
