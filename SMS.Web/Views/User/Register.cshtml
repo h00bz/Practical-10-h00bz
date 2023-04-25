@@ -1,0 +1,26 @@
+@model UserViewModel
+
+<div class="card shadow rounded mt-4 p-4">
+
+    <h3 class="mb-3">Register</h3>
+
+    <form asp-action="Register" method="post">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <!-- TBC add inputs for Name, Email, Password, PasswordConfirm, Role -->
+
+        <div class="mt-4">
+            <input type="submit" value="Register" class="btn btn-primary" />
+            <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Cancel</a>
+            <span class="ms-4">
+              Already have an Account? <a asp-controller="User" asp-action="Login">Login here</a>
+            </span>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

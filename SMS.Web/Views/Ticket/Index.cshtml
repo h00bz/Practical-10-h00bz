@@ -1,0 +1,50 @@
+﻿@model IList<Ticket>
+
+<partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("","Tickets")
+}) />
+<div class="card rounded shadow p-4">
+  
+   <div class="d-flex align-items-center justify-content-between mb-4">
+      <h3>Open Ticket List</h3>
+
+      <!-- an action link styled as a button to navigate to Create Action -->
+      <!-- TBC check user role -->
+      <a asp-action="Create" class="btn btn-primary btn-sm">
+            <i class="bi bi-plus"></i> Create Ticket
+      </a>     
+      
+   </div>
+
+   <table class="table">
+      <thead>
+      <tr>
+         <th>Id</th>
+         <th>Student</th>
+         <th>Issue</th>
+         <th>Created</th>           
+         <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+         @foreach(var t in Model) {
+            <tr>
+               <td>@t.Id</td>
+               <td>@t.Student.Name</td>
+               <td>@t.Issue</td>
+               <td>@t.CreatedOn</td>              
+               <td>
+                  <!-- TBC check user role -->
+                  <form  asp-action="Close">
+                     <input type="hidden" name="id" value=@t.Id />
+                     <button type="submit" class="btn btn-link text-dark">
+                        <i class="bi bi-tools mr-2" title="close ticket"></i>
+                     </button>
+                  </form>                 
+               </td>
+            </tr>
+         }
+      </tbody>
+   </table>
+</div>
