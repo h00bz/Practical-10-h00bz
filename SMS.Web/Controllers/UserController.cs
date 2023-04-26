@@ -60,9 +60,31 @@ public class UserController : BaseController
     // POST /user/register
     [HttpPost]
     // TBC add validate anti forgery token decorator
-    public IActionResult Register(/** TBC add bind **/ UserViewModel m)
+    [ValidateAntiForgeryToken]
+    public IActionResult Register([Bind ("Name, Email, Password, PasswordConfirm, Role")] UserViewModel m)
     {
         // TBC 
+
+        var exists= svc.GetUserByEmail(m.Email);
+        if (exists is not null)
+        {
+            ModelState.AddModelError("Email", "This Email address already exists");
+        }
+
+        if (ModelState.IsValid)
+        {
+            var user= svc.Register(m.Name, m.Email, m.Password, m.Role);
+
+            if (user is null)
+            {
+                Alert("Registration failed", AlertType.warning);
+            }
+            else 
+            {
+            Alert("Regeistration was successful");
+            return RedirectToAction(nameof(Login));
+            }
+        }
 
         // if email address is already in use 
             //  add model state error for Email

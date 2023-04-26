@@ -11,7 +11,7 @@
 
       <!-- an action link styled as a button to navigate to Create Action -->
       <!-- TBC check user role -->
-      <a asp-action="Create" class="btn btn-primary btn-sm">
+      <a asp-condition=@User.HasOneOfRoles("admin, support") asp-action="Create" class="btn btn-primary btn-sm">
             <i class="bi bi-plus"></i> Create Ticket
       </a>     
       
@@ -36,7 +36,7 @@
                <td>@t.CreatedOn</td>              
                <td>
                   <!-- TBC check user role -->
-                  <form  asp-action="Close">
+                  <form asp-condition=@User.HasOneOfRoles("admin, support") asp-action="Close">
                      <input type="hidden" name="id" value=@t.Id />
                      <button type="submit" class="btn btn-link text-dark">
                         <i class="bi bi-tools mr-2" title="close ticket"></i>

@@ -29,11 +29,11 @@
                             <a class="nav-link text-dark hover-effect" asp-controller="Home" asp-action="Index">Home</a>
                         </li>  
 
-                        <li class="nav-item">
+                        <li asp-condition= "@(User.Identity.IsAuthenticated)" class="nav-item">
                             <a class="nav-link text-dark hover-effect" asp-controller="Student" asp-action="Index">Students</a>
                         </li>
 
-                        <li class="nav-item">
+                        <li asp-condition= "@(User.Identity.IsAuthenticated)" class="nav-item">
                             <a class="nav-link text-dark hover-effect" asp-controller="Ticket" asp-action="Index">Tickets</a>
                         </li>
 

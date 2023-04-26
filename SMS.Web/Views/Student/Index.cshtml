@@ -12,7 +12,7 @@
         <h3>Student List</h3>
         
         <!-- TBC check user role -->
-        <a class="btn btn-sm btn-primary" asp-action="create" title="add student" aria-label="add student">
+        <a asp-condition=@User.HasOneOfRoles("admin") class= "btn btn-sm btn-primary" asp-action="create" title="add student" aria-label="add student">
            <i class="bi bi-plus"></i> Create
         </a>
     </div>
@@ -41,7 +41,7 @@
                             <i class="bi bi-display-fill me-2" title="view student" arial-label="view student"></i>
                         </a>
                         <!-- TBC check user role -->
-                        <a asp-action="Edit" asp-route-id=@s.Id>
+                        <a asp-condition=@User.HasOneOfRoles("admin, support") asp-action="Edit" asp-route-id=@s.Id>
                             <i class="bi bi-pencil-fill me-2" title="edit student" aria-label="edit student"></i>
                         </a>
                     </td>

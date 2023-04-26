@@ -7,6 +7,7 @@ using SMS.Data.Services;
 
 namespace SMS.Web.Controllers;
 
+[Authorize]
 public class StudentController : BaseController
 {
     private IStudentService svc;
@@ -39,6 +40,7 @@ public class StudentController : BaseController
     }
 
     // GET: /student/create
+    [Authorize (Roles="admin")]
     public IActionResult Create()
     {
         // display blank form to create a student
@@ -48,6 +50,8 @@ public class StudentController : BaseController
     // POST /student/create
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize (Roles="admin")]
+
     public IActionResult Create([Bind("Name, Email, Course, Age, Grade, PhotoUrl")] Student s)
     {   
         // validate email is unique
@@ -93,6 +97,8 @@ public class StudentController : BaseController
     // POST /student/edit/{id}
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize (Roles="admin, support")]
+
     public IActionResult Edit(int id, Student s)
     {
         // check if email exists and is not owned by student being edited 
@@ -119,7 +125,8 @@ public class StudentController : BaseController
         return View(s);
     }
 
-    // GET / student/delete/{id}     
+    // GET / student/delete/{id}  
+    [Authorize (Roles="admin")]
     public IActionResult Delete(int id)
     {
         // load the student using the service
@@ -158,6 +165,7 @@ public class StudentController : BaseController
      // ============== Student ticket management ==============
 
     // GET /student/ticketcreate/{id}
+    [Authorize]
     public IActionResult TicketCreate(int id)
     {
         var student = svc.GetStudent(id);
@@ -176,6 +184,7 @@ public class StudentController : BaseController
     // POST /student/ticketcreate
     [HttpPost]
     [ValidateAntiForgeryToken]
+    [Authorize]
     public IActionResult TicketCreate([Bind("StudentId, Issue")] Ticket t)
     {
         if (ModelState.IsValid)
@@ -192,6 +201,7 @@ public class StudentController : BaseController
     }
 
      // GET /student/ticketedit/{id}
+    [Authorize]   
     public IActionResult TicketEdit(int id)
     {
         var ticket = svc.GetTicket(id);

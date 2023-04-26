@@ -42,7 +42,7 @@
     
                 <!-- navigation link to Update action, passing the correct route id parameter --> 
                 <!-- TBC check user role -->
-                <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-secondary" aria-label="edit student">
+                <a asp-condition=@User.HasOneOfRoles("admin, support") asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-secondary" aria-label="edit student">
                     <i class="bi bi-pen-fill" title="edit student"></i>
                     <span class="ms-1 d-none d-md-inline">Edit</span>
                 </a>
@@ -55,7 +55,7 @@
  
                 <!-- navigation link to Delete action, passing the correct route id parameter --> 
                 <!-- TBC check user role -->
-                <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger" aria-label="delete student">
+                <a asp-condition=@User.HasOneOfRoles("admin, support") asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-sm btn-outline-danger" aria-label="delete student">
                     <i class="bi bi-trash-fill" title="delete student"></i>
                     <span class="ms-1 d-none d-md-inline">Delete</span>
                 </a>  
