@@ -178,7 +178,7 @@ public class StudentController : BaseController
         // create a ticket view model and set foreign key
         var ticket = new Ticket { StudentId = id }; 
         // render blank form
-        return View( ticket );
+        return View(ticket);
     }
 
     // POST /student/ticketcreate
